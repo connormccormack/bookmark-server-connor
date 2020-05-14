@@ -1,5 +1,5 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
+const { uuid } = require('uuidv4');
 const bookmarkRouter = express.Router();
 const bodyParser = express.json();
 const logger = require('../logger');
@@ -49,7 +49,7 @@ bookmarkRouter
       return res.status(400).send('Missing Url');
     }
   
-    const id = uuidv4();
+    const id = uuid();
   
     const bookmark = {
       id,
