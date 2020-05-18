@@ -16,7 +16,7 @@ const bookmarks = [
     url: 'https://developer.mozilla.org',
     description: 'The only place to find web documentation',
     rating: 5 },
-  { id: 1,
+  { id: '1',
     title: 'Moz Dev Network',
     url: 'https://developer.mozilla.org',
     description: 'The ONE TRUE awesome place to find web documentation',

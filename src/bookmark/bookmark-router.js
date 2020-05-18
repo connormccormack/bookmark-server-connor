@@ -9,23 +9,7 @@ bookmarkRouter
   .route('/bookmarks')
   .get((req, res) => {
     res.json(bookmarks);
-  });
-
-bookmarkRouter
-  .route('/bookmark/:id')
-  .get((req, res) => {
-    const { id } = req.params;
-    const bookmark = bookmarks.find(b => b.id === parseInt(id));
-  
-    if (!bookmark) {
-      logger.error(`Bookmark with id ${id} not found.`);
-      return res.status(404).send('Bookmark Not Found');
-    }
-    res.json(bookmark);
-  });
-
-bookmarkRouter
-  .route('/bookmark')
+  })
   .post(bodyParser, (req, res) => {
     const { title, rating, description, url } = req.body;
   
@@ -68,11 +52,21 @@ bookmarkRouter
   });
 
 bookmarkRouter
-  .route('/bookmark/:id')
+  .route('/bookmarks/:id')
+  .get((req, res) => {
+    const { id } = req.params;
+    const bookmark = bookmarks.find(b => b.id === id);
+  
+    if (!bookmark) {
+      logger.error(`Bookmark with id ${id} not found.`);
+      return res.status(404).send('Bookmark Not Found');
+    }
+    res.json(bookmark);
+  })
   .delete((req, res) => {
     const { id } = req.params;
   
-    const bookmarkIndex = bookmarks.findIndex(li => li.id === parseInt(id));
+    const bookmarkIndex = bookmarks.findIndex(li => li.id === id);
   
     if (bookmarkIndex === -1) {
       logger.error(`Bookmark with id ${id} not found.`);
